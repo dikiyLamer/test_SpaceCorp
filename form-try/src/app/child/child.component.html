@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="form">
+        <form [formGroup]="myForm" (onSubmit)="handle()">
+            <div class="login">
+                <label for="login">Логин</label>
+                <p></p>
+                <input placeholder="Введите логин" [ngClass]="{inputInvalid: loginInputInvalid, inputValid: !loginInputInvalid }" name="login" id="login" type="text" formControlName="login" #loginField>
+                <p></p>
+                <ng-container *ngIf="myForm.get('login')?.invalid && myForm.get('login')?.touched">
+                    <ng-container *ngIf="myForm.get('login')!.errors!['minlength']">
+                        <span class="invalidText">Логин должен быть более {{myForm.get('login')!.errors!['minlength'].requiredLength}} символов</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('login')!.errors!['required']">
+                        <span class="invalidText">Поле не должно быть пустым</span>
+                    </ng-container>
+                    
+                </ng-container>
+            </div>  
+            
+            <div class="password">
+                <label for="password">Пароль</label>
+                <p></p>
+                <input placeholder="Введите пароль" [ngClass]="{inputInvalid: passwordInputInvalid, inputValid: !passwordInputInvalid }" name="password" id="password" type="text" formControlName="password" #passwordField>
+                <p></p>
+                <ng-container *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched">
+                    <ng-container *ngIf="myForm.get('password')!.errors!['minlength']">
+                        <span class="invalidText">Пароль должен быть более {{myForm.get('password')!.errors!['minlength'].requiredLength}} символов</span>
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('password')!.errors!['required']">
+                        <span class="invalidText">Поле не должно быть пустым</span>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <button disabled="myForm.invalid" type="submit">Подтвердить</button>
+            
+        </form>
+
+    </div>
+</div>
