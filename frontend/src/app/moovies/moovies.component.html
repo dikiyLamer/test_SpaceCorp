@@ -1,0 +1,59 @@
+
+
+<div class="popup" *ngIf="openPopup">
+    <app-popup-comp [moovie]="mooviePopup" [toCreate]="toCreate" (declineEvent)="onDeclinePopup()" (notToCreate)="onNotToCreate()"></app-popup-comp>
+</div>
+
+<div class="all">
+
+    <div class="header">
+        <div class="container header__container">
+            <div class="images">
+                <img src="../../assets/angular.png" class="header__angular" alt="иконка ангуляра">
+                <img src="../../assets/muzhik.png" class="header__muzhik" alt="иконка мужика" [title]="role" (click)="logout()">
+                <div class="header__sort" (click)="sortArray()">
+                    <span class="material-symbols-outlined">
+                        sort
+                    </span>
+                </div>
+            </div>
+            <span class="material-symbols-outlined">
+                account_circle
+            </span>
+        </div>
+    </div>
+
+    <div class="payload">
+        <div class="container">
+            <div class="paload__moovies" *ngFor="let moovie of moovies" >
+                <!-- <span>id: {{moovie._id}}</span><p></p> -->
+                <div class="payload__image">
+                    <img [src]="moovie.image ? moovie.image.buffer : moovie.image" alt="123">
+                </div>
+                <div class="payload__info">
+                    <span class="payload__name">name: {{moovie.name}}</span><p></p>
+                    <span class="payload__rating">rating: {{moovie.rating}}</span><p></p>
+                    <span class="payload__views">views: {{moovie.views}}</span><p></p>
+                    <span class="payload__views">description: {{moovie.description}}</span>
+                </div>
+
+                <div class="payload__edit" *ngIf="role === 'admin'">
+                    <span class="material-symbols-outlined" (click)="popupOpen(moovie)">
+                        edit
+                    </span>
+                    <span class="material-symbols-outlined" (click)="deleteMoovie(moovie)">
+                            delete
+                    </span>
+                </div>
+                
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="create" *ngIf="role === 'admin'" (click)="popupOpenToCreate()">
+        <span class="material-symbols-outlined">
+            add
+        </span>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+services:
+
+  # postgres:
+  #   image: postgres:15.1
+  #   environment:
+  #     POSTGRES_USER: shell
+  #     POSTGRES_PASSWORD: shell
+  #     POSTGRES_DB:  shell
+  #   volumes:
+  #     - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+  #     - postgres_microservice_back:/var/lib/postgresql/data
+  #   restart: unless-stopped
+  #   ports:
+  #     - 5432:5432
+
+  
+  mongodb:
+    image: mongo:latest
+    container_name: 'mongodb'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo:/data/db
+    restart: unless-stopped
+
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin4_container
+  #   restart: always
+  #   ports:
+  #     - "5050:80"
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+
+  back:
+    build: backend/
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo:
+  pgadmin-data:

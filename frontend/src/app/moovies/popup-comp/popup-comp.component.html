@@ -1,0 +1,51 @@
+<div class="popup">
+    <form [formGroup]="moovieForm" (ngSubmit)="onSubmit()">
+        <div class="popup__inputs" *ngIf="toCreate; else update">
+            <label for="name">Название фильма:</label>
+            <p></p>
+            <input id="name" type="text" formControlName="name">
+            <p></p>
+            <label for="rating">Рейтинг фильма:</label>
+            <p></p>
+            <input id="rating" type="number" formControlName="rating">
+            <p></p>
+            <label for="views">Просмотры:</label>
+            <p></p>
+            <input id="views" type="number" formControlName="views">
+            <p></p>
+            <label for="description">Описание:</label>
+            <p></p>
+            <input id="description" type="text" formControlName="description">
+            <p></p>
+        </div>
+        <ng-template #update>
+            <div class="popup__inputs">
+                <label for="name">Название фильма:</label>
+                <p></p>
+                <input id="name" type="text" formControlName="name" [placeholder]="moovie.name"  [value]="moovie.name">
+                <p></p>
+                <label for="rating">Рейтинг фильма:</label>
+                <p></p>
+                <input id="rating" type="number" formControlName="rating" [placeholder]="moovie.rating" [value]="moovie.rating">
+                <p></p>
+                <label for="views">Просмотры:</label>
+                <p></p>
+                <input id="views" type="number" formControlName="views" [placeholder]="moovie.views" [value]="moovie.views">
+                <p></p> 
+                <label for="description">Описание:</label>
+                <p></p>
+                <input id="description" type="text" formControlName="description"  [placeholder]="moovie.description" [value]="moovie.description">
+                <p></p>
+                <label for="image">Картинка:</label>
+                <p></p>
+                <input id="image" type="file"  (change)="onFileChange($event)">
+                <p></p>
+            </div>
+        </ng-template>
+        <div class="popup__buttons">
+            <button class="accept" type="submit">Применить</button>
+            <button class="decline" (click)="onDecline()" >Отмена</button>
+        </div>
+
+    </form>
+</div>

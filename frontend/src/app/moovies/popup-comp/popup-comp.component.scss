@@ -1,0 +1,41 @@
+.popup{
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+
+    
+}
+
+.popup__inputs{
+    
+    margin-left: 20px;
+    height: 200px;
+}
+
+label{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+input{
+    margin-top: 10px;
+}
+
+.popup__buttons{
+    height: 200px;
+    width: 300px;
+
+    .accept{
+        position: absolute;
+        bottom: 20px;
+        left: 10%;
+    }
+    .decline{
+        position: absolute;
+        bottom: 20px;
+        right: 10%;
+    }
+}
+
+
